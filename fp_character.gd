@@ -6,6 +6,7 @@ const JUMP_VELOCITY := 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var sensitivity : float = ProjectSettings.get_setting("player/look_sensitivity")
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
 
@@ -16,9 +17,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is  InputEventMouseMotion:
-			neck.rotate_y(-event.relative.x * 0.01)
-			camera.rotate_x(-event.relative.y * 0.01)
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(90))
+			neck.rotate_y(-event.relative.x * sensitivity)
+			camera.rotate_x(-event.relative.y * sensitivity)
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

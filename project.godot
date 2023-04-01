@@ -51,4 +51,4 @@ ui_down={
 
 [player]
 
-look_sensitivity=0.01
+look_sensitivity=0.005
